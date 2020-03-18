@@ -2,47 +2,31 @@ let http = require('http');
 let fs = require('fs');
 const url = require('url');
 
-function logRequest({ method, url }) {
-    const log = {
-        time: Date.now(),
-        method,
-        url
-    };
-
-    fs.readFile('./data.json', (err, data) => {
-        if (err) {
-            throw err;
-        }
-
-        const json = JSON.parse((data));
-        json.logs.push(log);
-
-        fs.writeFile('./data.json', JSON.stringify(json, undefined, '    '));
-    });
-}
-
 const requestHandler = (request, response) => {
     logRequest(request);
 
-    if (request.url === '/logs') {
-        fs.readFile('./data.json', (err, data) => {
-            response.write(data);
-            response.end();
-        })
-    } else if (request.url === '/') {
-        response.writeHead(200, {'Content-type': 'text/json'});
-        response.end('Node.js homework');
-    } else {
-        const queryObject = url.parse(request.url,true).query;
-        response.writeHead(200, {'Content-type': 'text/json'});
+    const requestUrl = url.parse(request.url, true);
 
-        if (queryObject.start) {
-            fs.readFile('./data.json', (err, content) => {
-                const filtered = JSON.parse(content).logs.filter(log => log.time >= queryObject.start && log.time <= queryObject.end);
-                response.end(`Current logs ${JSON.stringify(filtered, undefined, '    ')}`);
-            });
-        } else {
-            response.end('No logs found');
+    switch (requestUrl.pathname) {
+        case '/logs': {
+            const data = fs.readFileSync('./data.json');
+            const { start, end } = requestUrl.query;
+
+            response.writeHead(200, {'Content-type': 'application/json'});
+
+            if (start) {
+                const filtered = JSON.parse(data).logs.filter(log => log.time >= start && log.time <= end);
+                response.write(JSON.stringify(filtered, undefined, '    '));
+                response.end();
+            } else {
+                response.write(data);
+                response.end();
+            }
+            break;
+        }
+        default: {
+            response.writeHead(200, {'Content-type': 'text/html'});
+            response.end('Node.js homework');
         }
     }
 };
@@ -56,4 +40,31 @@ server.listen(3000, (err) => {
     console.log(`server is listening on 3000`)
 });
 
+
+function logRequest({ method, url }) {
+    const log = {
+        time: Date.now(),
+        method,
+        url
+    };
+
+    const data = fs.readFileSync('./data.json');
+    const json = parseJson(data);
+
+    json.logs.push(log);
+
+    fs.writeFileSync('./data.json', JSON.stringify(json, undefined, '    '))
+}
+
+function parseJson(data) {
+    let json;
+
+    try {
+        json = JSON.parse(data);
+    } catch (err) {
+        json = { logs: [] };
+    }
+
+    return json;
+}
 

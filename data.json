@@ -1,49 +1,49 @@
 {
     "logs": [
         {
-            "time": 1584549563666,
+            "time": 1584552676621,
             "method": "GET",
-            "url": "/logs/vererferfw"
+            "url": "/logs?start=1584549572518&end=1584549861713"
         },
         {
-            "time": 1584549563718,
+            "time": 1584552792804,
             "method": "GET",
-            "url": "/favicon.ico"
+            "url": "/logs?start=1584549572518&end=1584549861713"
         },
         {
-            "time": 1584549564385,
+            "time": 1584552812060,
             "method": "GET",
-            "url": "/logs/vererferfw"
+            "url": "/logs?start=1584549572518&end=1584549861713"
         },
         {
-            "time": 1584549564441,
+            "time": 1584552901527,
             "method": "GET",
-            "url": "/favicon.ico"
+            "url": "/logs?start=1584549572518&end=1584549861713"
         },
         {
-            "time": 1584549566792,
+            "time": 1584552926497,
+            "method": "GET",
+            "url": "/logs?start=1584549572518&end=1584549861713"
+        },
+        {
+            "time": 1584552935448,
+            "method": "GET",
+            "url": "/logs?start=1584549572518&end=1584552926497"
+        },
+        {
+            "time": 1584553283385,
+            "method": "GET",
+            "url": "/logs?start=1584549572518&end=1584552926497"
+        },
+        {
+            "time": 1584553290325,
             "method": "GET",
             "url": "/logs"
         },
         {
-            "time": 1584549572518,
-            "method": "POST",
-            "url": "/?start=1584548955579&end=1584548967796"
-        },
-        {
-            "time": 1584549649016,
+            "time": 1584553294346,
             "method": "GET",
-            "url": "/?start=1584549564441&end=1584549572518"
-        },
-        {
-            "time": 1584549861713,
-            "method": "GET",
-            "url": "/logs.mlknlknln"
-        },
-        {
-            "time": 1584549861779,
-            "method": "GET",
-            "url": "/favicon.ico"
+            "url": "/"
         }
     ]
 }
