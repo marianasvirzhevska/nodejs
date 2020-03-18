@@ -1,5 +1,6 @@
 let http = require('http');
 let fs = require('fs');
+const url = require('url');
 
 function logRequest({ method, url }) {
     const log = {
@@ -28,14 +29,25 @@ const requestHandler = (request, response) => {
             response.write(data);
             response.end();
         })
-    } else {
+    } else if (request.url === '/') {
         response.writeHead(200, {'Content-type': 'text/json'});
         response.end('Node.js homework');
+    } else {
+        const queryObject = url.parse(request.url,true).query;
+        response.writeHead(200, {'Content-type': 'text/json'});
+
+        if (queryObject.start) {
+            fs.readFile('./data.json', (err, content) => {
+                const filtered = JSON.parse(content).logs.filter(log => log.time >= queryObject.start && log.time <= queryObject.end);
+                response.end(`Current logs ${JSON.stringify(filtered, undefined, '    ')}`);
+            });
+        } else {
+            response.end('No logs found');
+        }
     }
 };
 
 const server = http.createServer(requestHandler);
-
 
 server.listen(3000, (err) => {
     if (err) {

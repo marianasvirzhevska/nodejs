@@ -1,4 +1,49 @@
 {
     "logs": [
+        {
+            "time": 1584549563666,
+            "method": "GET",
+            "url": "/logs/vererferfw"
+        },
+        {
+            "time": 1584549563718,
+            "method": "GET",
+            "url": "/favicon.ico"
+        },
+        {
+            "time": 1584549564385,
+            "method": "GET",
+            "url": "/logs/vererferfw"
+        },
+        {
+            "time": 1584549564441,
+            "method": "GET",
+            "url": "/favicon.ico"
+        },
+        {
+            "time": 1584549566792,
+            "method": "GET",
+            "url": "/logs"
+        },
+        {
+            "time": 1584549572518,
+            "method": "POST",
+            "url": "/?start=1584548955579&end=1584548967796"
+        },
+        {
+            "time": 1584549649016,
+            "method": "GET",
+            "url": "/?start=1584549564441&end=1584549572518"
+        },
+        {
+            "time": 1584549861713,
+            "method": "GET",
+            "url": "/logs.mlknlknln"
+        },
+        {
+            "time": 1584549861779,
+            "method": "GET",
+            "url": "/favicon.ico"
+        }
     ]
 }
