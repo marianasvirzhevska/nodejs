@@ -1,0 +1,27 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "Node.js Homework",
+  "main": "index.js",
+  "scripts": {
+    "prod": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marianasvirzhevska/nodejs.git"
+  },
+  "keywords": [
+    "Node.js",
+    "npm"
+  ],
+  "author": "Mariana Svirzhevska <mariana_svirzhevska@epam.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marianasvirzhevska/nodejs/issues"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
+  "homepage": "https://github.com/marianasvirzhevska/nodejs#readme"
+}
