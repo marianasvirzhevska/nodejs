@@ -30,7 +30,6 @@ class Form extends Component {
         const newNote = note
             ? { ...note, text }
             : { text };
-        console.log(111, newNote)
 
         handleClose(newNote);
     };

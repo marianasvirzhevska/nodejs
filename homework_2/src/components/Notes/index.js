@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import NoteItem from '../NoteItem';
 import Button from '../Button';
 import Form from '../Form';
+import * as api from '../../api/notes';
 
 class Notes extends Component {
     token = null;
@@ -14,46 +16,18 @@ class Notes extends Component {
     };
 
     componentDidMount() {
-        const token = JSON.parse(localStorage.getItem("user"));
-        this.token = `jwt_token ${token.jwt_token}`;
-
-        this.callApi()
+        api.getNotes()
             .then(res => this.setState({ notes: res.notes, loaded: true}))
             .catch(err => console.log(err));
     }
 
-    callApi = async () => {
-        const response = await fetch('/notes', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': this.token
-            }
-        });
 
-        const body = await response.json();
-        if (response.status !== 200) throw Error(body.message);
-
-        return body;
-    };
-
-    deleteNote = async (id) => {
-        const config = {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': this.token
-            },
-            body: JSON.stringify({id: id}),
-        };
-
-        fetch('/notes', config)
+    deleteNote = (id) => {
+        api.deleteNote(id)
             .then(() => {
-                this.setState((oldState) => {
-                    return {
-                        notes: oldState.notes.filter(note => note.id !== id)
-                    }
-                });
+                this.setState((oldState) => ({
+                    notes: oldState.notes.filter(note => note.id !== id)
+                }));
             });
     };
 
@@ -82,38 +56,17 @@ class Notes extends Component {
             ...note,
             id: Date.now()
         };
-        console.log(newNote)
 
-        const config = {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': this.token
-            },
-            body: JSON.stringify(newNote),
-        };
-
-        fetch('/notes', config)
+        api.createNote(newNote)
             .then(() => {
-                this.setState((oldState) => {
-                    return {
-                        notes: [...oldState.notes, newNote]
-                    }
-                });
+                this.setState((oldState) => ({
+                    notes: [...oldState.notes, newNote]
+                }));
             });
     };
 
     editNote = (editedNote) => {
-        const config = {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': this.token
-            },
-            body: JSON.stringify(editedNote),
-        };
-
-        fetch('/notes', config)
+        api.editNote(editedNote)
             .then(() => {
                 this.setState((oldState) => {
                     const newNotes = oldState.notes.map((note) => editedNote.id === note.id
@@ -127,9 +80,16 @@ class Notes extends Component {
             });
     };
 
+    logout = () => {
+        const history = this.props.history;
+
+        localStorage.removeItem("user");
+        history.push('/');
+    };
+
     render() {
         const { notes, loaded, createForm, editedNote } = this.state;
-        const { deleteNote, closeNoteForm, openNoteForm } = this;
+        const { deleteNote, closeNoteForm, openNoteForm, logout } = this;
 
         return(
             <div className="App">
@@ -166,10 +126,15 @@ class Notes extends Component {
                             <p>No notes yet</p>
                         )
                     }
+                    <Button
+                        type="outlined"
+                        color="danger"
+                        handler={logout}
+                    >Logout</Button>
                 </div>
             </div>
         )
     }
 }
 
-export default Notes;
+export default withRouter(Notes);
