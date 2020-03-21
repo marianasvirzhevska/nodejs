@@ -14,7 +14,7 @@ const Button = ({children, handler, color, type, size}) => {
 };
 
 Button.propTypes = {
-	color: PropTypes.oneOf(['default', 'primary', 'secondary']),
+	color: PropTypes.oneOf(['default', 'primary', 'secondary', 'danger']),
 	type: PropTypes.oneOf(['contained', 'outlined', 'link']),
 	size: PropTypes.oneOf(['small', 'normal', 'large']),
 	children: PropTypes.any.isRequired,

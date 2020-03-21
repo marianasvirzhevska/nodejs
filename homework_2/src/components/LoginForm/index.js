@@ -32,7 +32,7 @@ class LoginForm extends Component {
 
         if (statusCode === 200) {
             this.setState({ response: body, error: false });
-            localStorage.setItem("user", JSON.parse(body).jwt_token);
+            localStorage.setItem("user", body);
             history.push('/notes');
         } else {
             this.setState({ error: JSON.parse(body).status });
