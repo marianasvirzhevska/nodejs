@@ -34,6 +34,11 @@
             "id": 8,
             "user": 3,
             "text": "Some note text edited"
+        },
+        {
+            "id": 10,
+            "user": 3,
+            "text": "Some note text"
         }
     ]
 }

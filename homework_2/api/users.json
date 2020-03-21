@@ -1,8 +1,8 @@
 {
   "users": [
-    { "id": 1, "username": "Mariana", "password": "pass111"},
-    { "id": 2, "username": "Kate", "password": "pass222"},
-    { "id": 3, "username": "Oliver", "password": "pass333"},
-    { "id": 4, "username": "Mike", "password": "pass444"}
+    { "id": 1, "email": "kola4ok91@gmail.com", "password": "1111"},
+    { "id": 2, "email": "kate@email.com", "password": "2222"},
+    { "id": 3, "email": "oliver@email.com", "password": "3333"},
+    { "id": 4, "email": "maike@email.com", "password": "4444"}
   ]
 }

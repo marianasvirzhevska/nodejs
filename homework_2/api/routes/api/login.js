@@ -7,20 +7,21 @@ const secret = require('../../config/auth').secret;
 const { users } = require('../../users');
 
 router.post('/login', (req, res) => {
-    let { username, password } = req.body;
+    let { email, password } = req.body;
 
-    let user = users.find(user => user.username === username);
+    let user = users.find(user => user.email === email);
 
     if (!user){
         res.status(401).json({status: 'User not found'});
-    }
-
-    if (!(user.password === password)){
+        res.end();
+    } else if (user.password === password){
+        let jwt_token = jwt.sign(user, secret);
+        res.json({jwt_token});
+    } else {
         res.status(401).json({status: 'Wrong password'})
     }
 
-    let jwt_token = jwt.sign(user, secret);
-    res.json({jwt_token});
+    res.end();
 });
 
 module.exports = router;
