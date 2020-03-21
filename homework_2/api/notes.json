@@ -39,6 +39,11 @@
             "id": 10,
             "user": 3,
             "text": "Some note text"
+        },
+        {
+            "text": "ewewe",
+            "id": 1584829646124,
+            "user": 1
         }
     ]
 }

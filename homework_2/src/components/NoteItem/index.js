@@ -1,7 +1,7 @@
 import React from "react";
 import Button from '../Button';
 
-const NoteItem = ({ note, handler }) => {
+const NoteItem = ({ note, deleteHandler, editHandler }) => {
 
     return (
         <li className="list-item">
@@ -10,9 +10,15 @@ const NoteItem = ({ note, handler }) => {
                 <div className="actions">
                     <Button
                         size="small"
+                        type="outlined"
+                        color="secondary"
+                        handler={editHandler}
+                    >Edit</Button>
+                    <Button
+                        size="small"
                         type="contained"
                         color="danger"
-                        handler={handler}
+                        handler={deleteHandler}
                     >Delete</Button>
                 </div>
             </div>

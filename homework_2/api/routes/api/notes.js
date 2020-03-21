@@ -26,6 +26,8 @@ router.put('/notes', (req, res) => {
     const note = json.notes.find(note => note.id === req.body.id);
 
     if (!note) {
+        req.body.user = req.user.id;
+
         json.notes.push(req.body);
 
         fs.writeFileSync(filePath, JSON.stringify(json, null, '    '), (err) => {

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
 import NoteItem from '../NoteItem';
+import Button from '../Button';
+import Form from '../Form';
 
 class Notes extends Component {
     token = null;
@@ -8,6 +10,7 @@ class Notes extends Component {
     state = {
         loaded: false,
         notes: [],
+        createForm: false
     };
 
     componentDidMount() {
@@ -54,14 +57,97 @@ class Notes extends Component {
             });
     };
 
+    closeNoteForm = (note) => {
+        if (note.id) {
+            this.editNote(note)
+        } else {
+            this.createNote(note);
+        }
+
+        this.setState({
+            createForm: false,
+            editedNote: null
+        })
+    };
+
+    openNoteForm = (editedNote) => {
+        this.setState({
+            createForm: true,
+            editedNote
+        });
+    };
+
+    createNote = (note) => {
+        const newNote = {
+            ...note,
+            id: Date.now()
+        };
+        console.log(newNote)
+
+        const config = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': this.token
+            },
+            body: JSON.stringify(newNote),
+        };
+
+        fetch('/notes', config)
+            .then(() => {
+                this.setState((oldState) => {
+                    return {
+                        notes: [...oldState.notes, newNote]
+                    }
+                });
+            });
+    };
+
+    editNote = (editedNote) => {
+        const config = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': this.token
+            },
+            body: JSON.stringify(editedNote),
+        };
+
+        fetch('/notes', config)
+            .then(() => {
+                this.setState((oldState) => {
+                    const newNotes = oldState.notes.map((note) => editedNote.id === note.id
+                        ? editedNote
+                        : note);
+
+                    return {
+                        notes: newNotes
+                    }
+                });
+            });
+    };
+
     render() {
-        const { notes, loaded } = this.state;
-        const { deleteNote } = this;
+        const { notes, loaded, createForm, editedNote } = this.state;
+        const { deleteNote, closeNoteForm, openNoteForm } = this;
 
         return(
             <div className="App">
                 <div className="container">
                     <h1 className="form-title">Notes</h1>
+                    {
+                        createForm ? (
+                            <Form
+                                note={editedNote}
+                                handleClose={closeNoteForm}/>
+                        ) : (
+                            <Button
+                                type="outlined"
+                                color="primary"
+                                handler={() => openNoteForm()}
+                            >Create note</Button>
+                        )
+                    }
                     {
                         loaded && notes.length ? (
                           <ol className="list">
@@ -70,7 +156,8 @@ class Notes extends Component {
                                       <NoteItem
                                           key={i}
                                           note={item}
-                                          handler={() => deleteNote(item.id)}
+                                          editHandler={() => openNoteForm(item)}
+                                          deleteHandler={() => deleteNote(item.id)}
                                       />
                                   ))
                               }
