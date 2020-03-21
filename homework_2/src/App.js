@@ -1,34 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import { PrivateRoute } from './components/PrivateRoute';
+import NotFound from './components/NotFound';
 import LoginForm from './components/LoginForm';
+import Notes from './components/Notes';
 
-class App extends Component {
-    state = {
-        response: '',
-    };
-
-    componentDidMount() {
-        this.callApi()
-            .then(res => this.setState({ response: res.express }))
-            .catch(err => console.log(err));
-    }
-
-    callApi = async () => {
-        const response = await fetch('/');
-        const body = await response.json();
-        if (response.status !== 200) throw Error(body.message);
-
-        return body;
-    };
-
-    render() {
-        return (
-            <div className="App">
-                <div className="container">
-                    <LoginForm />
-                </div>
-            </div>
-        );
-    }
-}
+const App = () => {
+    return (
+        <Router>
+            <Switch>
+                <Route exact path="/" component={LoginForm}/>
+                <PrivateRoute exact path="/notes" component={Notes}/>
+                <Route path="*" component={NotFound}/>
+            </Switch>
+        </Router>
+    )
+};
 
 export default App;

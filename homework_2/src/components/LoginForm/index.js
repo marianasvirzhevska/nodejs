@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+
 import Input from '../Input';
 import Button from '../Button';
 
@@ -14,6 +16,7 @@ class LoginForm extends Component {
         e.preventDefault();
 
         const { email, password } = this.state;
+        const history = this.props.history;
         const user = { email, password };
 
         const response = await fetch('/login', {
@@ -29,6 +32,8 @@ class LoginForm extends Component {
 
         if (statusCode === 200) {
             this.setState({ response: body, error: false });
+            localStorage.setItem("user", JSON.parse(body).jwt_token);
+            history.push('/notes');
         } else {
             this.setState({ error: JSON.parse(body).status });
         }
@@ -48,34 +53,38 @@ class LoginForm extends Component {
         const { handleSubmit, handleInput } = this;
 
         return (
-            <div className="form-control">
-                <h3 className='form-title'>Login</h3>
-                <form className="login-form">
-                    <Input
-                        label="Email"
-                        type="email"
-                        name="email"
-                        value={email}
-                        onInputChange={handleInput}
-                    />
-                    <Input
-                        label="Password"
-                        type="password"
-                        name="password"
-                        autocomplete="current-password"
-                        value={password}
-                        onInputChange={handleInput}
-                    />
-                    { error ? <p className="error">{error}</p> : null }
-                    <Button
-                        color="primary"
-                        type="contained"
-                        handler={handleSubmit}
-                    >Login</Button>
-                </form>
+            <div className="App">
+                <div className="container">
+                    <div className="form-control">
+                        <h3 className='form-title'>Login</h3>
+                        <form className="login-form">
+                            <Input
+                                label="Email"
+                                type="email"
+                                name="email"
+                                value={email}
+                                onInputChange={handleInput}
+                            />
+                            <Input
+                                label="Password"
+                                type="password"
+                                name="password"
+                                autocomplete="current-password"
+                                value={password}
+                                onInputChange={handleInput}
+                            />
+                            { error ? <p className="error">{error}</p> : null }
+                            <Button
+                                color="primary"
+                                type="contained"
+                                handler={handleSubmit}
+                            >Login</Button>
+                        </form>
+                    </div>
+                </div>
             </div>
         )
     }
 }
 
-export default LoginForm;
+export default withRouter(LoginForm);
