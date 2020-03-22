@@ -3,42 +3,74 @@
         {
             "text": "Some note text",
             "id": 1,
-            "user": 1
+            "user": 1,
+            "checked": true
         },
         {
             "text": "Some note text",
             "id": 2,
-            "user": 1
+            "user": 1,
+            "checked": false
         },
         {
             "text": "Some note text",
             "id": 3,
-            "user": 2
+            "user": 2,
+            "checked": true
         },
         {
             "text": "Some note text",
             "id": 4,
-            "user": 2
+            "user": 2,
+            "checked": true
         },
         {
             "text": "Some note text",
             "id": 5,
-            "user": 3
+            "user": 3,
+            "checked": false
         },
         {
             "text": "Some note text edited",
             "id": 8,
-            "user": 3
+            "user": 3,
+            "checked": true
         },
         {
             "text": "Some note text",
             "id": 10,
-            "user": 3
+            "user": 3,
+            "checked": true
         },
         {
             "text": "Created!",
             "id": 1584831159549,
+            "user": 1,
+            "checked": false
+        },
+        {
+            "text": "Super note",
+            "id": 1584834219866,
+            "user": 1,
+            "checked": true
+        },
+        {
+            "text": "New note created",
+            "id": 1584834981904,
+            "user": 1,
+            "checked": false
+        },
+        {
+            "text": "Test note created",
+            "id": 1584835012419,
+            "checked": false,
             "user": 1
+        },
+        {
+            "text": "Create new note text",
+            "id": 1584835156296,
+            "checked": false,
+            "user": 2
         }
     ]
 }

@@ -1,13 +1,19 @@
 import React from "react";
 import Button from '../Button';
 
-const NoteItem = ({ note, deleteHandler, editHandler }) => {
+const NoteItem = ({ note, deleteHandler, editHandler, checkHandler }) => {
 
     return (
         <li className="list-item">
             <div className="item-wrap">
                 <div className="info">{note.text}</div>
                 <div className="actions">
+                    <Button
+                        size="small"
+                        type={note.checked ? "contained" : "outlined"}
+                        color="primary"
+                        handler={checkHandler}
+                    >{note.checked ? "Done" : "Check"}</Button>
                     <Button
                         size="small"
                         type="outlined"

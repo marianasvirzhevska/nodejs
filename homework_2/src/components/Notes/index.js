@@ -54,7 +54,8 @@ class Notes extends Component {
     createNote = (note) => {
         const newNote = {
             ...note,
-            id: Date.now()
+            id: Date.now(),
+            checked: false
         };
 
         api.createNote(newNote)
@@ -80,6 +81,15 @@ class Notes extends Component {
             });
     };
 
+    checkNote = (note) => {
+        const newNote = {
+            ...note,
+            checked: !note.checked
+        };
+
+        this.editNote(newNote);
+    };
+
     logout = () => {
         const history = this.props.history;
 
@@ -89,7 +99,7 @@ class Notes extends Component {
 
     render() {
         const { notes, loaded, createForm, editedNote } = this.state;
-        const { deleteNote, closeNoteForm, openNoteForm, logout } = this;
+        const { deleteNote, closeNoteForm, openNoteForm, logout, checkNote } = this;
 
         return(
             <div className="App">
@@ -110,18 +120,22 @@ class Notes extends Component {
                     }
                     {
                         loaded && notes.length ? (
-                          <ol className="list">
-                              {
-                                  notes.map((item, i) => (
-                                      <NoteItem
-                                          key={i}
-                                          note={item}
-                                          editHandler={() => openNoteForm(item)}
-                                          deleteHandler={() => deleteNote(item.id)}
-                                      />
-                                  ))
-                              }
-                          </ol>
+                            <>
+                                <p><b>Total notes: {notes.length}</b></p>
+                              <ol className="list">
+                                  {
+                                      notes.map((item, i) => (
+                                          <NoteItem
+                                              key={i}
+                                              note={item}
+                                              editHandler={() => openNoteForm(item)}
+                                              deleteHandler={() => deleteNote(item.id)}
+                                              checkHandler={() => checkNote(item)}
+                                          />
+                                      ))
+                                  }
+                              </ol>
+                            </>
                         ) : (
                             <p>No notes yet</p>
                         )
