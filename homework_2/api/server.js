@@ -8,7 +8,7 @@ const log = require('./routes/middleware/log');
 const auth = require('./routes/middleware/auth');
 
 const loginRouter = require('./routes/api/login');
-const userRouter = require('./routes/api/notes');
+const notesRouter = require('./routes/api/notes');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -20,6 +20,6 @@ app.use(loginRouter);
 
 app.use(auth);
 
-app.use(userRouter);
+app.use(notesRouter);
 
 app.listen(port);
