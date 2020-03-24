@@ -4,7 +4,7 @@ const secret = require('../../config/auth').secret;
 module.exports = (req, res, next) => {
     const reqHeaders = req.headers['authorization'];
 
-    if (!Boolean(reqHeaders)) {
+    if (!reqHeaders) {
         next();
     } else {
         // JWT auiwgwjhfgioajoij

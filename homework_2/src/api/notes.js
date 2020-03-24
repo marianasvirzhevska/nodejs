@@ -24,7 +24,7 @@ export function deleteNote(id) {
 
 export function createNote(note) {
     const config = withToken({
-        method: 'PUT',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },

@@ -20,26 +20,34 @@ router.get('/notes', (req, res) => {
     }
 });
 
-//add and edit notes
+//add notes
+router.post('/notes', (req, res) => {
+
+    req.body.user = req.user.id;
+
+    json.notes.push(req.body);
+
+    fs.writeFileSync(filePath, JSON.stringify(json, null, '    '), (err) => {
+        if (err) {
+            res.status(500).json({ status: 'Server error. Please try later' });
+            throw err;
+        }
+    });
+
+    res.json({status: 'Note created'});
+    res.end();
+
+});
+
+// edit notes
 router.put('/notes', (req, res) => {
 
     const note = json.notes.find(note => note.id === req.body.id);
+    let editedNotes = {notes: []};
 
-    if (!note) {
-        req.body.user = req.user.id;
-
-        json.notes.push(req.body);
-
-        fs.writeFileSync(filePath, JSON.stringify(json, null, '    '), (err) => {
-            if (err) {
-                res.status(500).json({ status: 'Server error. Please try later' });
-                throw err;
-            }
-        });
-        res.json({status: 'Note created'});
+    if(!note) {
+        res.status(500).json({ status: 'Error. No such note.' });
     } else {
-        let editedNotes = {notes: []};
-
         editedNotes.notes = json.notes.map(note => {
             if (note.id === req.body.id) {
                 return req.body;
@@ -57,7 +65,7 @@ router.put('/notes', (req, res) => {
             }
         });
 
-        res.json({status: 'Note edited'});
+        res.json({ status: 'Note edited' });
     }
 
     res.end();
