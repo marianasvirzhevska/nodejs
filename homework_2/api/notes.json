@@ -1,0 +1,75 @@
+{
+    "notes": [
+        {
+            "text": "Some note text",
+            "id": 1,
+            "checked": true,
+            "user": 1
+        },
+        {
+            "text": "Some note text",
+            "id": 3,
+            "checked": true,
+            "user": 2
+        },
+        {
+            "text": "Some note text",
+            "id": 4,
+            "checked": true,
+            "user": 2
+        },
+        {
+            "text": "Some note text",
+            "id": 5,
+            "checked": false,
+            "user": 3
+        },
+        {
+            "text": "Some note text edited",
+            "id": 8,
+            "checked": true,
+            "user": 3
+        },
+        {
+            "text": "Some note text",
+            "id": 10,
+            "checked": true,
+            "user": 3
+        },
+        {
+            "text": "Created!",
+            "id": 1584831159549,
+            "checked": false,
+            "user": 1
+        },
+        {
+            "text": "Super note",
+            "id": 1584834219866,
+            "checked": true,
+            "user": 1
+        },
+        {
+            "text": "New note created",
+            "id": 1584834981904,
+            "checked": false,
+            "user": 1
+        },
+        {
+            "text": "Test note created",
+            "id": 1584835012419,
+            "checked": false,
+            "user": 1
+        },
+        {
+            "text": "Create new note text",
+            "id": 1584835156296,
+            "checked": false,
+            "user": 2
+        },
+        {
+            "text": "To do Node.js homework Edited",
+            "id": 1584983587400,
+            "checked": true
+        }
+    ]
+}

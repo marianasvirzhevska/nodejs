@@ -1,0 +1,73 @@
+@import "../../styles/variables"
+@import "../../styles/mixins"
+
+.root
+  border: none
+  outline: none
+  cursor: pointer
+  text-align: center
+  @include flex
+  align-items: center
+  justify-content: center
+  @include border-radius(4px)
+  font-weight: 500
+  &:hover
+    opacity: 0.8
+
+.default
+  color: $black
+  &.contained
+    background: $greyFont
+  &.outlined
+    background: transparent
+    border: 1px solid $greyFont
+  &.link
+    background: transparent
+
+.primary
+  &.contained
+    color: $white
+    background: $green
+  &.outlined
+    color: $green
+    background: transparent
+    border: 1px solid $green
+  &.link
+    color: $green
+    background: transparent
+
+.secondary
+  &.contained
+    color: $white
+    background: $blue
+  &.outlined
+    color: $blue
+    background: transparent
+    border: 1px solid $blue
+  &.link
+    color: $blue
+    background: transparent
+
+.danger
+  &.contained
+    color: $white
+    background: $red
+  &.outlined
+    color: $red
+    background: transparent
+    border: 1px solid $red
+  &.link
+    color: $red
+    background: transparent
+
+.small
+  padding: 8px 16px 
+  font-size: $smallFont
+
+.normal
+  padding: 11px 24px 13px
+  font-size: $mainFont
+
+.large
+  padding: 14px 30px 16px
+  font-size: $middleFont
